@@ -18,7 +18,7 @@ var VERSION = '0.6.8',
     debug('initializing...');
     loadPreferences();
     // Request local database
-    var request = webkitIndexedDB.open('Minimalist', 3);
+    var request = indexedDB.open('Minimalist', 3);
     request.onupgradeneeded = function(e) {
         debug('migrating database...');
         if (!request.result.objectStoreNames.contains('Modules')) {
@@ -384,7 +384,7 @@ minDB.remove = function(i, callback) {
  */
 minDB.reset = function(callback) {
     debug('reseting data...');
-    var resetRequest = webkitIndexedDB.deleteDatabase('Minimalist');
+    var resetRequest = indexedDB.deleteDatabase('Minimalist');
         resetRequest.onblocked = resetRequest.onblocked = function(e) {
             if (typeof callback === 'function') { callback(); }
             window.location.reload();
